@@ -1,3 +1,26 @@
 Other Dataset:
 https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset?select=Books.csv
 
+Things Done(24-07-25):
+1. All preprocessing Done for Semantic Part
+2. Created embedding for first 100 movies
+3. System work properly 
+
+Problems:
+1. Storing Vector in numpy array.
+2. Using Cosine similarty that is not scalable
+3. Use some advance searching techinques for decreasing latency
+4. Read about re-ranker and how it is different from cosine similarty
+
+
+Features to add:
+1. Use stemming and other preprocessing techinques to add hybrid searching Feature
+2. Ask user two thing Movie name or type of movie or both, use system prompt to search appropriate movie
+2. Use FastAPI and streamlit to get a hands-on production side
+3. Deploy this on EC2
+
+
+Priorities:
+1. FastAPI and streamlit integration
+2. Deploy on EC2
+3. Add fast search system like ANN
