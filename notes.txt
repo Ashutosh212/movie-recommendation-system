@@ -6,6 +6,14 @@ Things Done(24-07-25):
 2. Created embedding for first 100 movies
 3. System work properly 
 
+Things Done(25-07-25):
+1. Gui done with streamlit
+2. Connected gui web to fastapi predict url
+3. Integration work properly 
+
+Next:
+1. Define function in /post for query using input and return most similar movies
+
 Problems:
 1. Storing Vector in numpy array.
 2. Using Cosine similarty that is not scalable
@@ -21,6 +29,6 @@ Features to add:
 
 
 Priorities:
-1. FastAPI and streamlit integration
+1. FastAPI and streamlit integration (Done)
 2. Deploy on EC2
 3. Add fast search system like ANN
