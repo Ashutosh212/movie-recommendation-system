@@ -30,5 +30,6 @@ Features to add:
 
 Priorities:
 1. FastAPI and streamlit integration (Done)
-2. Deploy on EC2
+2. Push to Docker Hub
 3. Add fast search system like ANN
+4. Deploy on EC2

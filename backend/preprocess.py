@@ -1,4 +1,10 @@
 import pandas as pd
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI()
 
 def build_movie_text(row):
     parts = [
@@ -10,3 +16,12 @@ def build_movie_text(row):
         f"Director: {row['crew']}",
     ]
     return " ".join(parts)
+
+
+def get_embedding(text: str):
+    response = client.embeddings.create(
+        input=text,
+        model="text-embedding-3-small",
+        dimensions=256
+    )
+    return response.data[0].embedding

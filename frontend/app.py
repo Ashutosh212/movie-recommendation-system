@@ -11,6 +11,8 @@ API_URL = "http://127.0.0.1:8000/recommend"
 
 df_final = pd.read_csv("dataset/df_final.csv")
 
+df_final = df_final[:100]
+
 st.title("Movie Recommender System")
 
 st.markdown("Fill out the movie name from the list or share the detail of the movie you want to watch today")
@@ -36,7 +38,7 @@ movie_type = st.text_area(
     placeholder="Example: Today, I'd like to watch a sci-fi movie with superheroes or space battles.",
     height=200
 )
-
+  
 
 recommended_movies = """
 ## Hey your top five movies will be:
@@ -44,24 +46,16 @@ recommended_movies = """
 2. **Star War**
 """
 
-def stream_data():
-    for word in recommended_movies.split(" "):
-        yield word + " "
-        time.sleep(0.1)
-
-
 
 if st.button("Recommend Movies", type="primary",icon=":material/movie:"):
     
     if option is not None:
         row = df_final[(df_final['title'] == option)]
+        # st.write(row)
         context = build_movie_text(row)
-        # st.write(context)
+      
     else:
         context = movie_type
-        # st.write(context)
-    
-    # st.write_stream(stream_data)
 
     data = {
         'context': context
@@ -71,14 +65,20 @@ if st.button("Recommend Movies", type="primary",icon=":material/movie:"):
         response = requests.post(API_URL, json=data)
         result = response.json()
 
-        if response.status_code == 200 and 'movies' in result:
-            st.success(f"Recommended Movies: **{result['movies']}**")
-            with st.expander("Overview"):
-                st.write("This movie matches your preferences for science fiction and space themes.")
+        if response.status_code == 200:
+            st.success(f"Recommended Movies")
+            for i, movie_dict in enumerate(result["recommendations"]):
+                
+                st.write(f"{i+1}: **{movie_dict["Title"]}**")
+                with st.expander("Overview"):
+                    st.write(movie_dict["Overview"])
 
         else:
-            st.error("❌ Prediction failed. Check API or input format.")
+            st.error("Prediction failed. Check API or input format.")
+            st.json(result)
+
+            st.error("Prediction failed. Check API or input format.")
             st.json(result)
 
     except requests.exceptions.ConnectionError:
-        st.error("🚫 Could not connect to FastAPI server. Make sure it's running.")
+        st.error("Could not connect to FastAPI server. Make sure it's running.")
