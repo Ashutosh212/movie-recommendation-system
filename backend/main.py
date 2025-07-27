@@ -7,7 +7,7 @@ import pandas as pd
 from datetime import date
 import traceback
 from fastapi.responses import JSONResponse
-from utils.preprocess import get_embedding
+from .preprocess import get_embedding
 
 app = FastAPI()
 
@@ -17,6 +17,9 @@ df_final = df_final[:100]
 
 class MovieInput(BaseModel):
     context: Annotated[str, Field(..., description="Name of the Movie")]
+@app.get('/')
+def home():
+    return "Welcome to Recommendation Project"
 
 @app.post('/recommend')
 def recommend(data: MovieInput):
@@ -24,7 +27,7 @@ def recommend(data: MovieInput):
     # print(data)
     context = data.context
 
-    embedding_matrix = np.load("movie_embeddings.npy")
+    embedding_matrix = np.load("results/movie_embeddings.npy")
 
     norms = np.linalg.norm(embedding_matrix, axis=1, keepdims=True) # What is this `linalg.norm`
     normalized_matrix = embedding_matrix / norms

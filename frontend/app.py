@@ -1,10 +1,11 @@
 import streamlit as st
 import requests
-import time
 import pandas as pd
-import base64
+import sys
 
-from utils.preprocess import build_movie_text
+sys.path.append(".")
+
+from backend.preprocess import build_movie_text
 
 API_URL = "http://127.0.0.1:8000/recommend"
 

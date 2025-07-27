@@ -33,3 +33,35 @@ Priorities:
 2. Push to Docker Hub
 3. Add fast search system like ANN
 4. Deploy on EC2
+
+
+What was happening when you ran "streamlit run frontend/app.py"
+- You were getting an error of No module found 'backend' beacuse
+
+Streamlit sets the working directory to frontend/, and Python treats frontend/ as the root. 
+So it looks for backend/ inside frontend/, which doesn’t exist.
+
+- So it get solved when i added "sys.path.append(".")" this line to script
+
+Another option is run ""streamlit run ./frontend/app.py""
+
+Docker thing
+
+
+▶️ To run Streamlit:
+
+
+docker run -p 8501:8501 \
+  -e OPENAI_API_KEY=your_key_here \
+  recommender-app
+  
+Streamlit runs on port 8501.
+
+▶️ To run FastAPI (with Uvicorn):
+
+docker run -p 8000:8000 \
+  -e OPENAI_API_KEY=your_key_here \
+  recommender-app \
+  uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+
+This overrides the default CMD and runs Uvicorn directly.
