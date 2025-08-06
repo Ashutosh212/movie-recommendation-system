@@ -39,11 +39,15 @@ def recommend(data: MovieInput):
     scores = np.dot(normalized_matrix, query)
 
     # Get top-k
-    top_k_idx = np.argsort(-scores)[:5]  # What is this `argsort`
+    top_k_idx = np.argsort(-scores)[:6]  # What is this `argsort`
 
     try:
         movie_dict = []
+        first = False
         for i in top_k_idx:
+            if not first:
+                first = True
+                continue
             curr_dict = {
                 "Title": df_final.iloc[i]['title'],
                 "Overview": [df_final.iloc[i]['overview']]

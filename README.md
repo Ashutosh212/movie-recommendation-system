@@ -3,7 +3,9 @@
 This project is a hybrid web application that delivers movie recommendations using machine learning techniques. It features a **FastAPI backend** to serve the core recommendation logic and a **Streamlit frontend** for an interactive user interface.
 
 ---
-
+![Alt text](Images/demo1.png)
+![Alt text](Images/demo2.png)
+---
 ## Project Overview
 
 The Movie Recommendation System allows users to receive personalized movie suggestions based on content similarity. The backend uses a content-based filtering model built from movie overviews and embeddings. The frontend enables users to input movie titles and view top-N similar movies.
@@ -86,4 +88,26 @@ uvicorn main:app --reload
 ```
 cd ../frontend
 streamlit run app.py
+```
+
+
+## Run with Docker
+
+This project is also **Dockerized for easy deployment**. You can run both the backend and frontend via Docker with minimal setup.
+### 1. Pull the Docker image
+
+```bash
+docker pull ashut212/recommender-system:latest
+```
+
+### 2. Run the container
+
+```bash
+docker run -p 8501:8501 -p 8000:8000 ashut212/recommender-system
+```
+### Docker Hub
+```markdown
+You can find the published image here:  
+[https://hub.docker.com/r/ashut212/recommender-system](https://hub.docker.com/repository/docker/ashut212/recommender-system/general)
+
 ```

@@ -50,7 +50,6 @@ Docker thing
 
 ▶️ To run Streamlit:
 
-
 docker run -p 8501:8501 \
   -e OPENAI_API_KEY=your_key_here \
   recommender-app
@@ -65,3 +64,10 @@ docker run -p 8000:8000 \
   uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 
 This overrides the default CMD and runs Uvicorn directly.
+
+
+You should run:
+
+docker run --env-file .env -p 8000:8000 -p 8501:8501 gdocker_image_name
+
+from the same directory where your .env file is located.
